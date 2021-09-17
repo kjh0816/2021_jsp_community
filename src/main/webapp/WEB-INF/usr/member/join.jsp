@@ -28,6 +28,7 @@
     $.get(
       "../member/getCheckValidLoginId",
       {
+        ajax: "Y",
         loginId: form.loginId.value
       },
       function(data) {
