@@ -12,9 +12,11 @@ import com.jhs.exam.exam2.util.Ut;
 
 public class ArticleService implements ContainerComponent {
 	private ArticleRepository articleRepository;
+	private MemberService memberService;
 	
 	public void init() {
 		articleRepository = Container.articleRepository;
+		memberService = Container.memberService;
 	}
 
 	public ResultData write(int boardId, int memberId, String title, String body) {
@@ -82,6 +84,10 @@ public class ArticleService implements ContainerComponent {
 	public ResultData actorCanDelete(Member member, Article article) {
 		int memberId = member.getId();
 		int writerMemberId = article.getMemberId();
+		
+		if ( memberService.isAdmin(member) ) {
+			return ResultData.from("S-2", "관리자권한으로 삭제가 가능합니다.");
+		}
 
 		if (memberId != writerMemberId) {
 			return ResultData.from("F-1", "권한이 없습니다.");
