@@ -13,7 +13,7 @@ import com.jhs.exam.exam2.util.Ut;
 public class ArticleService implements ContainerComponent {
 	private ArticleRepository articleRepository;
 	private MemberService memberService;
-	
+
 	public void init() {
 		articleRepository = Container.articleRepository;
 		memberService = Container.memberService;
@@ -25,16 +25,18 @@ public class ArticleService implements ContainerComponent {
 		return ResultData.from("S-1", Ut.f("%d번 게시물이 생성되었습니다.", id), "id", id);
 	}
 
-	public List<Article> getForPrintArticles(Member actor, int boardId, String searchKeywordTypeCode, String searchKeyword, int itemsCountInAPage, int page) {
+	public List<Article> getForPrintArticles(Member actor, int boardId, String searchKeywordTypeCode,
+			String searchKeyword, int itemsCountInAPage, int page) {
 		int limitFrom = (page - 1) * itemsCountInAPage;
 		int limitTake = itemsCountInAPage;
-		
-		List<Article> articles = articleRepository.getForPrintArticles(boardId, searchKeywordTypeCode, searchKeyword, limitFrom, limitTake);
-		
-		for ( Article article : articles ) {
+
+		List<Article> articles = articleRepository.getForPrintArticles(boardId, searchKeywordTypeCode, searchKeyword,
+				limitFrom, limitTake);
+
+		for (Article article : articles) {
 			updateForPrintData(actor, article);
 		}
-		
+
 		return articles;
 	}
 
@@ -84,8 +86,8 @@ public class ArticleService implements ContainerComponent {
 	public ResultData actorCanDelete(Member member, Article article) {
 		int memberId = member.getId();
 		int writerMemberId = article.getMemberId();
-		
-		if ( memberService.isAdmin(member) ) {
+
+		if (memberService.isAdmin(member)) {
 			return ResultData.from("S-2", "관리자권한으로 삭제가 가능합니다.");
 		}
 
@@ -97,7 +99,7 @@ public class ArticleService implements ContainerComponent {
 	}
 
 	public int getArticlesCount(int boardId, String searchKeywordTypeCode, String searchKeyword) {
-		return articleRepository.getArticlesCount(boardId,  searchKeywordTypeCode, searchKeyword);
+		return articleRepository.getArticlesCount(boardId, searchKeywordTypeCode, searchKeyword);
 	}
 
 }
