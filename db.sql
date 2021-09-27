@@ -44,9 +44,9 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'admin',
 loginPw = 'admin',
-`name` = '홍길동',
+`name` = '김지후',
 nickname = '관리자',
-email = 'jangka512@gmail.com',
+email = 'readshot2@gmail.com',
 cellphoneNo = '01012341234',
 authLevel = 7;
 
@@ -55,9 +55,9 @@ SET regDate = NOW(),
 updateDate = NOW(),
 loginId = 'user1',
 loginPw = 'user1',
-`name` = '홍길순',
-nickname = '강바람',
-email = 'jangka512@gmail.com',
+`name` = '김밥샙',
+nickname = '밥샵',
+email = 'readshot2@gmail.com',
 cellphoneNo = '01012341234';
 
 # 게시판 테이블 생성
